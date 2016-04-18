@@ -83,7 +83,7 @@ namespace Task01
                 var k = Convert.ToDouble(dataGridView1[1, i].EditedFormattedValue);
                 var q = Convert.ToDouble(dataGridView1[2, i].EditedFormattedValue);
                 var c = Convert.ToDouble(dataGridView1[3, i].EditedFormattedValue);
-                v = -c/2 + Math.Sqrt(q/k);
+                v = -c + Math.Sqrt(q/k);
                 dataGridView1[0, i].Value = Math.Min((decimal) Math.Max(v, 0.0), numericUpDown5.Value);
             }
             UpdateTotal();
