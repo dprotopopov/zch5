@@ -5,16 +5,38 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task01", "Task01\Task01.csproj", "{49BD4A1E-CBAA-4F11-9C5C-2DFEDA91E373}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Task02", "Task02\Task02.vcxproj", "{DF1D730E-40E8-4358-A2AC-9368C4FAC45C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|Win32 = Debug|Win32
 		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{49BD4A1E-CBAA-4F11-9C5C-2DFEDA91E373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{49BD4A1E-CBAA-4F11-9C5C-2DFEDA91E373}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49BD4A1E-CBAA-4F11-9C5C-2DFEDA91E373}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{49BD4A1E-CBAA-4F11-9C5C-2DFEDA91E373}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{49BD4A1E-CBAA-4F11-9C5C-2DFEDA91E373}.Debug|Win32.ActiveCfg = Debug|Any CPU
 		{49BD4A1E-CBAA-4F11-9C5C-2DFEDA91E373}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{49BD4A1E-CBAA-4F11-9C5C-2DFEDA91E373}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49BD4A1E-CBAA-4F11-9C5C-2DFEDA91E373}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{49BD4A1E-CBAA-4F11-9C5C-2DFEDA91E373}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{49BD4A1E-CBAA-4F11-9C5C-2DFEDA91E373}.Release|Win32.ActiveCfg = Release|Any CPU
+		{DF1D730E-40E8-4358-A2AC-9368C4FAC45C}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{DF1D730E-40E8-4358-A2AC-9368C4FAC45C}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{DF1D730E-40E8-4358-A2AC-9368C4FAC45C}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{DF1D730E-40E8-4358-A2AC-9368C4FAC45C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{DF1D730E-40E8-4358-A2AC-9368C4FAC45C}.Debug|Win32.Build.0 = Debug|Win32
+		{DF1D730E-40E8-4358-A2AC-9368C4FAC45C}.Release|Any CPU.ActiveCfg = Release|Win32
+		{DF1D730E-40E8-4358-A2AC-9368C4FAC45C}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{DF1D730E-40E8-4358-A2AC-9368C4FAC45C}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{DF1D730E-40E8-4358-A2AC-9368C4FAC45C}.Release|Win32.ActiveCfg = Release|Win32
+		{DF1D730E-40E8-4358-A2AC-9368C4FAC45C}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
