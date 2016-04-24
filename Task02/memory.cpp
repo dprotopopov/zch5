@@ -108,8 +108,8 @@ int main(int argc, char* argv[])
 	upperi = static_cast<double *>(malloc(count * sizeof(double)));
 	loweri = static_cast<double *>(malloc(count * sizeof(double)));
 
-	for (int i = 0; i < count; i++) upperi[i] = v * 2 / count;
-	for (int i = 0; i < count; i++) loweri[i] = 0.0;
+	for (int i = 0; i < count; i++) upperi[i] = v;
+	for (int i = 0; i < count; i++) loweri[i] = 0.001;
 	for (int i = 0; i < count; i++) ui[i] = 0.0;
 
 	long total = 1L << (2 * count); // количество перебираемых точек
