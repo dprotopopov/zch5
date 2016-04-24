@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h> 
 #include <float.h>
+#include <string.h>
 #include <mpi.h> 
 
 #ifndef max
@@ -63,7 +64,7 @@ int main(int argc, char* argv[])
 
 	int count;
 	double v, y;
-	double* vi;
+	double* vi = NULL;
 	double* ui; // лучшее значение
 	double* xi; // перебираемое значение
 	double* upperi; // верхн€€ границы
@@ -84,11 +85,13 @@ int main(int argc, char* argv[])
 		/* ќпераци€ выполн€етс€ только на ведущем процессе */
 		FILE* fl = fopen(inputFileName, "r");
 		fscanf(fl, "%d", &count);
-		fscanf(fl, "%e", &v);
+		fscanf(fl, "%lf", &v);
+		printf("v = %lf\n", v);
 		vi = static_cast<double *>(malloc(count * sizeof(double)));
 		for (int i = 0; i < count; i++)
 		{
-			fscanf(fl, "%e", &vi[i]);
+			fscanf(fl, "%lf", &vi[i]);
+			printf("vi[%d] = %lf\n", i, vi[i]);
 		}
 		fclose(fl);
 	}
@@ -105,8 +108,9 @@ int main(int argc, char* argv[])
 	upperi = static_cast<double *>(malloc(count * sizeof(double)));
 	loweri = static_cast<double *>(malloc(count * sizeof(double)));
 
-	for (int i = 0; i < count; i++) upperi[i] = v;
+	for (int i = 0; i < count; i++) upperi[i] = v * 2 / count;
 	for (int i = 0; i < count; i++) loweri[i] = 0.0;
+	for (int i = 0; i < count; i++) ui[i] = 0.0;
 
 	long total = 1L << (2 * count); // количество перебираемых точек
 
@@ -122,16 +126,16 @@ int main(int argc, char* argv[])
 			long index2 = index;
 			for (int i = 0; i < count; i++)
 			{
-				int j = index2 % 4;
-				index2 /= 4;
-				xi[i] = loweri[i] + j * (upperi[i] - loweri[i]) / 3;
+				int j = index2 & 3;
+				index2 >>= 2;
+				xi[i] = loweri[i] + (upperi[i] - loweri[i]) * j / 3;
 			}
 			if (!check(count, xi, v)) continue;
 			double y2 = func(count, vi, xi);
 			if (y2 < y)
 			{
 				y = y2;
-				for (int i = 0; i < count; i++) ui[i] = xi[i];
+				memcpy(ui, xi, count * sizeof(double));
 			}
 		}
 		if (myrank == 0)
@@ -144,11 +148,11 @@ int main(int argc, char* argv[])
 				if (y2 < y)
 				{
 					y = y2;
-					for (int i = 0; i < count; i++) ui[i] = xi[i];
+					memcpy(ui, xi, count * sizeof(double));
 				}
 			}
-			for (int i = 0; i < count; i++) loweri[i] = max(loweri[i], ui[i] - (upperi[i] - loweri[i]) / 3);
-			for (int i = 0; i < count; i++) upperi[i] = min(upperi[i], ui[i] + (upperi[i] - loweri[i]) / 3);
+			for (int i = 0; i < count; i++) loweri[i] = max(0.0, ui[i] - (upperi[i] - loweri[i]) / 3);
+			for (int i = 0; i < count; i++) upperi[i] = min(v, ui[i] + (upperi[i] - loweri[i]) / 3);
 		}
 		if (myrank > 0)
 		{
@@ -160,11 +164,13 @@ int main(int argc, char* argv[])
 	}
 
 	/* выводим результаты */
-	if (myrank == 0) {
-		FILE *fl = fopen(outputFileName, "w");
-		for (int i = 0; i < count; i++) 
+	if (myrank == 0)
+	{
+		FILE* fl = fopen(outputFileName, "w");
+		for (int i = 0; i < count; i++)
 		{
-			fprintf(fl, "%e\n", ui[i]);
+			fprintf(fl, "%lf\n", ui[i]);
+			printf("ui[%d] = %lf\n", i, ui[i]);
 		}
 		fclose(fl);
 	}
