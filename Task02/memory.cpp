@@ -17,13 +17,14 @@
 #define DATA_TAG 1
 
 // искомая функция
-double func(int count, double* vi, double* ui)
+double func(int count, double* vi, double v, double* ui)
 {
 	double y = 0.0;
 	for (int i = 0; i < count; i++)
 	{
 		if (ui[i] < 0.001) return DBL_MAX ;
-		y += vi[i] / ui[i];
+		double z = vi[i] / v - vi[i] / ui[i];
+		y += z*z;
 	}
 	return y;
 }
@@ -131,7 +132,7 @@ int main(int argc, char* argv[])
 				xi[i] = loweri[i] + (upperi[i] - loweri[i]) * j / 3;
 			}
 			if (!check(count, xi, v)) continue;
-			double y2 = func(count, vi, xi);
+			double y2 = func(count, vi, v, xi);
 			if (y2 < y)
 			{
 				y = y2;
