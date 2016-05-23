@@ -1,0 +1,1 @@
+"C:\Program Files\Microsoft MPI\Bin\mpiexec" -n 2 x64\Debug\Task03.exe Task03\input.txt Task03\output.txt
