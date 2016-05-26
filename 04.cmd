@@ -1,0 +1,1 @@
+Debug\Task04.exe Task04\input.txt Task04\output.txt
