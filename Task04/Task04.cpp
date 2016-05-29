@@ -115,7 +115,7 @@ int main(int argc, char* argv[])
 	}
 
 	xi.resize(count);
-	for (int i = 1; i < nrank;i++)
+	if (myrank == 0) for (int i = 1; i < nrank;i++)
 	{
 		double y1;
 		MPI_Recv(&y1, 1, MPI_DOUBLE, i, DATA_TAG, MPI_COMM_WORLD, &status);
@@ -136,5 +136,7 @@ int main(int argc, char* argv[])
 		}
 		ofs.close();
 	}
-	return 0;
+
+	MPI_Finalize();
+	exit(0);
 }
